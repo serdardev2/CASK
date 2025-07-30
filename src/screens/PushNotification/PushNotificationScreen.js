@@ -69,11 +69,6 @@ const PushNotificationScreen = ({route}) => {
 
     const pnTypeNumber = parseInt(selectedPN);
 
-    console.log('Config values:', {
-      API_ADMMDLID: Config.API_ADMMDLID,
-      API_SCOPE: Config.API_SCOPE,
-    });
-
     const requestData = {
       v: 1,
       platform: 'app',

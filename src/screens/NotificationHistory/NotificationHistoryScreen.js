@@ -87,7 +87,6 @@ const NotificationHistoryScreen = () => {
         navigateToHomeStackScreen('VideoModeScreen', {notificationData});
         break;
       default:
-        console.log('Unknown pn_type:', item.pn_type);
     }
   };
 
