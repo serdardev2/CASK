@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-17ea8b7f-61e3-43a0-8cf1-87140be22226" data-name="background" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="uuid-897917bd-0194-4527-ae8a-80e095fc2246" x1="252.398596" y1=".291016" x2="259.162656" y2="480.556792" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#141e30"/>
+      <stop offset=".494898" stop-color="#141e30"/>
+      <stop offset=".7934" stop-color="#192e48"/>
+      <stop offset="1" stop-color="#1c3755"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" width="512" height="512" style="fill: url(#uuid-897917bd-0194-4527-ae8a-80e095fc2246);"/>
+</svg>

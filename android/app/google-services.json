@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "684397192376",
+    "project_id": "cask-rnapptemplate-dev",
+    "storage_bucket": "cask-rnapptemplate-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684397192376:android:e85cdd192afc638642004d",
+        "android_client_info": {
+          "package_name": "com.cask.CASKRNAppTemplate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684397192376-u7gu3kla0qn0phr67i237le5874r05fi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cask.CASKRNAppTemplate",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "684397192376-fch8mh0ger4ectgmof47is34vmts2ek5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkwOdZZZdv6owT3cBFH2UBBxNCnAOsNC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684397192376-fch8mh0ger4ectgmof47is34vmts2ek5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "684397192376-3umlp8q851cbjhm9f6dbsrhqu022dnhm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cask.CASKRNAppTemplate"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
