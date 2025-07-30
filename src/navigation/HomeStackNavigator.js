@@ -1,14 +1,14 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Screen2 from '../screens/HomeStack/Screen2';
-import Screen3 from '../screens/HomeStack/Screen3';
-import Screen1 from '../screens/HomeStack/Screen1';
+import PhotoModeScreen from '../screens/HomeStack/PhotoModeScreen';
+import VideoModeScreen from '../screens/HomeStack/VideoModeScreen';
+import HomeScreen from '../screens/HomeStack/HomeScreen';
 import TextModeScreen from '../screens/HomeStack/TextModeScreen';
 import {Colors} from '../constants/colors';
 
 const Stack = createStackNavigator();
 
-const Tab1StackNavigator = () => {
+const HomeStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -21,8 +21,8 @@ const Tab1StackNavigator = () => {
         },
       }}>
       <Stack.Screen
-        name="Screen1"
-        component={Screen1}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{title: 'Home'}}
       />
       <Stack.Screen
@@ -31,17 +31,17 @@ const Tab1StackNavigator = () => {
         options={{title: 'Text Mode'}}
       />
       <Stack.Screen
-        name="Screen2"
-        component={Screen2}
-        options={{title: 'Push Notification'}}
+        name="PhotoModeScreen"
+        component={PhotoModeScreen}
+        options={{title: 'Photo Mode'}}
       />
       <Stack.Screen
-        name="Screen3"
-        component={Screen3}
-        options={{title: 'History'}}
+        name="VideoModeScreen"
+        component={VideoModeScreen}
+        options={{title: 'Video Mode'}}
       />
     </Stack.Navigator>
   );
 };
 
-export default Tab1StackNavigator;
+export default HomeStackNavigator;

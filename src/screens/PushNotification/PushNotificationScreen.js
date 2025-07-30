@@ -18,7 +18,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import {getFcmToken, getCurrentFcmToken} from '../../notificationServices';
 import {Colors} from '../../constants/colors';
 
-const Tab2Screen = ({route}) => {
+const PushNotificationScreen = ({route}) => {
   const [fcmToken, setFcmToken] = useState('');
   const [selectedPN, setSelectedPN] = useState(
     route.params?.selectedType || '1',
@@ -526,4 +526,4 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-export default Tab2Screen;
+export default PushNotificationScreen;

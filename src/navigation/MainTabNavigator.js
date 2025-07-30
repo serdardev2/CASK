@@ -1,8 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStackNavigator from './HomeStackNavigator';
-import Tab2Screen from '../screens/Tab2/Tab2Screen';
-import Tab3Screen from '../screens/Tab3/Tab3Screen';
+import PushNotificationScreen from '../screens/PushNotification/PushNotificationScreen';
+import NotificationHistoryScreen from '../screens/NotificationHistory/NotificationHistoryScreen';
 import HomeIcon from '../components/icons/HomeIcon';
 import NotificationIcon from '../components/icons/NotificationIcon';
 import HistoryIcon from '../components/icons/HistoryIcon';
@@ -23,7 +23,7 @@ const MainTabNavigator = () => {
         },
       }}>
       <Tab.Screen
-        name="Tab1"
+        name="Home"
         component={HomeStackNavigator}
         options={{
           tabBarLabel: 'Home',
@@ -33,7 +33,7 @@ const MainTabNavigator = () => {
       />
       <Tab.Screen
         name="Push Notification"
-        component={Tab2Screen}
+        component={PushNotificationScreen}
         options={{
           tabBarLabel: 'Push Notification',
           headerStyle: {
@@ -50,7 +50,7 @@ const MainTabNavigator = () => {
       />
       <Tab.Screen
         name="History"
-        component={Tab3Screen}
+        component={NotificationHistoryScreen}
         options={{
           tabBarLabel: 'History',
           headerStyle: {

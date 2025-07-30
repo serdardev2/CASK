@@ -14,13 +14,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import {FlashList} from '@shopify/flash-list';
 import {NotificationStorage} from '../../services/NotificationStorage';
 import {useFocusEffect} from '@react-navigation/native';
-import {navigateToTab1Screen} from '../../services/NavigationService';
+import {navigateToHomeStackScreen} from '../../services/NavigationService';
 import WebView from 'react-native-webview';
 import {Colors} from '../../constants/colors';
 
 const {width} = Dimensions.get('window');
 
-const Tab3Screen = () => {
+const NotificationHistoryScreen = () => {
   const [notifications, setNotifications] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -70,13 +70,13 @@ const Tab3Screen = () => {
 
     switch (item.pn_type) {
       case '1':
-        navigateToTab1Screen('TextMode', {notificationData});
+        navigateToHomeStackScreen('TextMode', {notificationData});
         break;
       case '2':
-        navigateToTab1Screen('Screen2', {notificationData});
+        navigateToHomeStackScreen('PhotoModeScreen', {notificationData});
         break;
       case '3':
-        navigateToTab1Screen('Screen3', {notificationData});
+        navigateToHomeStackScreen('VideoModeScreen', {notificationData});
         break;
       default:
         console.log('Unknown pn_type:', item.pn_type);
@@ -476,4 +476,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Tab3Screen;
+export default NotificationHistoryScreen;

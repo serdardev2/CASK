@@ -14,7 +14,7 @@ import {Colors} from '../../constants/colors';
 
 const {width} = Dimensions.get('window');
 
-const Screen1 = ({navigation, route}) => {
+const HomeScreen = ({navigation, route}) => {
   const [notificationData, setNotificationData] = useState(null);
   const [fcmToken, setFcmToken] = useState('');
 
@@ -267,4 +267,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen1;
+export default HomeScreen;

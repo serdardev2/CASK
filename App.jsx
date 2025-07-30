@@ -13,7 +13,7 @@ import {
 } from '@react-native-firebase/messaging';
 import {
   navigationRef,
-  navigateToTab1Screen,
+  navigateToHomeStackScreen,
 } from './src/services/NavigationService';
 import {NotificationStorage} from './src/services/NotificationStorage';
 
@@ -39,13 +39,13 @@ export default class App extends React.Component {
 
       switch (pnType) {
         case '1':
-          navigateToTab1Screen('TextMode', {notificationData});
+          navigateToHomeStackScreen('TextMode', {notificationData});
           break;
         case '2':
-          navigateToTab1Screen('Screen2', {notificationData});
+          navigateToHomeStackScreen('PhotoModeScreen', {notificationData});
           break;
         case '3':
-          navigateToTab1Screen('Screen3', {notificationData});
+          navigateToHomeStackScreen('VideoModeScreen', {notificationData});
           break;
         default:
       }

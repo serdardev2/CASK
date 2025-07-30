@@ -1,25 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  ScrollView,
-  Image,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
-const Screen2 = ({navigation, route}) => {
+const VideoModeScreen = ({navigation, route}) => {
   const [notificationData, setNotificationData] = useState(null);
-  const [imageLoading, setImageLoading] = useState(true);
+  const [videoId, setVideoId] = useState(null);
+  const [playing, setPlaying] = useState(false);
+
+  const extractYouTubeId = url => {
+    if (!url) return null;
+
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
+      /^([^&\n?#]+)$/,
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+    return null;
+  };
 
   useEffect(() => {
     if (route.params?.notificationData) {
       setNotificationData(route.params.notificationData);
-      if (route.params.notificationData.fullData?.data?.img_url) {
+      if (route.params.notificationData.fullData?.data?.youtube_url) {
+        const youtubeUrl =
+          route.params.notificationData.fullData.data.youtube_url;
+        const id = extractYouTubeId(youtubeUrl);
+        setVideoId(id);
         setNotificationData({
           ...route.params.notificationData,
-          img_url: route.params.notificationData.fullData.data.img_url,
+          youtube_url: youtubeUrl,
         });
       }
     }
@@ -27,32 +42,32 @@ const Screen2 = ({navigation, route}) => {
   return (
     <ScrollView style={styles.scrollContainer}>
       <View style={styles.container}>
-        <Text style={styles.title}>Tab 1 - Screen 2</Text>
+        <Text style={styles.title}>Video Mode</Text>
 
         {notificationData && (
           <View style={styles.notificationCard}>
             <Text style={styles.notificationTitle}>
-              {notificationData.title || 'Image Notification'}
+              {notificationData.title}
             </Text>
             <View style={styles.divider} />
 
-            {notificationData.img_url && (
-              <View style={styles.imageContainer}>
-                {imageLoading && (
-                  <ActivityIndicator
-                    size="large"
-                    color="#141e30"
-                    style={styles.loader}
-                  />
-                )}
-                <Image
-                  source={{uri: notificationData.img_url}}
-                  style={styles.image}
-                  onLoadStart={() => setImageLoading(true)}
-                  onLoadEnd={() => setImageLoading(false)}
-                  resizeMode="cover"
+            {videoId && (
+              <View style={styles.videoContainer}>
+                <YoutubePlayer
+                  height={220}
+                  play={playing}
+                  videoId={videoId}
+                  onChangeState={event => {
+                    if (event === 'ended') {
+                      setPlaying(false);
+                    }
+                  }}
                 />
               </View>
+            )}
+
+            {!videoId && notificationData.youtube_url && (
+              <Text style={styles.errorText}>Unable to load video</Text>
             )}
           </View>
         )}
@@ -109,23 +124,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0e0e0',
     marginVertical: 15,
   },
-  imageContainer: {
+  videoContainer: {
     width: '100%',
-    height: 250,
     marginBottom: 20,
     borderRadius: 8,
     overflow: 'hidden',
-    backgroundColor: '#f0f0f0',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#000',
   },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  loader: {
-    position: 'absolute',
-    zIndex: 1,
+  errorText: {
+    fontSize: 14,
+    color: '#ff4444',
+    textAlign: 'center',
+    marginVertical: 20,
   },
   metaInfo: {
     paddingTop: 10,
@@ -139,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen2;
+export default VideoModeScreen;

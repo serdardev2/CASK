@@ -8,9 +8,9 @@ export function navigate(name, params) {
   }
 }
 
-export function navigateToTab1Screen(screenName, params) {
+export function navigateToHomeStackScreen(screenName, params) {
   if (navigationRef.isReady()) {
-    navigationRef.navigate('Tab1');
+    navigationRef.navigate('Home');
     setTimeout(() => {
       navigationRef.navigate(screenName, params);
     }, 100);
