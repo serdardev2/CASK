@@ -6,11 +6,19 @@ import {
   Alert,
   StyleSheet,
   RefreshControl,
+  StatusBar,
+  Image,
+  Dimensions,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import {FlashList} from '@shopify/flash-list';
 import {NotificationStorage} from '../../services/NotificationStorage';
 import {useFocusEffect} from '@react-navigation/native';
 import {navigateToTab1Screen} from '../../services/NavigationService';
+import WebView from 'react-native-webview';
+import {Colors} from '../../constants/colors';
+
+const {width} = Dimensions.get('window');
 
 const Tab3Screen = () => {
   const [notifications, setNotifications] = useState([]);
@@ -62,7 +70,7 @@ const Tab3Screen = () => {
 
     switch (item.pn_type) {
       case '1':
-        navigateToTab1Screen('Screen1', {notificationData});
+        navigateToTab1Screen('TextMode', {notificationData});
         break;
       case '2':
         navigateToTab1Screen('Screen2', {notificationData});
@@ -95,152 +103,355 @@ const Tab3Screen = () => {
 
   const formatDate = timestamp => {
     const date = new Date(timestamp);
-    return date.toLocaleString();
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} min ago`;
+    if (diffHours < 24)
+      return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+
+    return date.toLocaleDateString();
+  };
+
+  const getNotificationIcon = pnType => {
+    switch (pnType) {
+      case '1':
+        return '📝';
+      case '2':
+        return '📷';
+      case '3':
+        return '🎥';
+      default:
+        return '📬';
+    }
+  };
+
+  const getNotificationColor = pnType => {
+    switch (pnType) {
+      case '1':
+        return Colors.gradients.purple;
+      case '2':
+        return Colors.gradients.pink;
+      case '3':
+        return Colors.gradients.blue;
+      default:
+        return Colors.gradients.light;
+    }
+  };
+
+  const renderMedia = item => {
+    if (
+      item.data?.image_url ||
+      item.fullPayload?.notification?.android?.imageUrl
+    ) {
+      const imageUrl =
+        item.data?.image_url ||
+        item.fullPayload?.notification?.android?.imageUrl;
+      return (
+        <Image
+          source={{uri: imageUrl}}
+          style={styles.notificationImage}
+          resizeMode="cover"
+        />
+      );
+    }
+
+    if (item.data?.video_url) {
+      return (
+        <View style={styles.videoContainer}>
+          <WebView
+            source={{uri: item.data.video_url}}
+            style={styles.notificationVideo}
+            allowsFullscreenVideo
+            mediaPlaybackRequiresUserAction={true}
+          />
+          <View style={styles.videoOverlay}>
+            <Text style={styles.videoPlayIcon}>▶️</Text>
+          </View>
+        </View>
+      );
+    }
+
+    return null;
   };
 
   const renderNotificationItem = ({item}) => (
     <TouchableOpacity
-      style={styles.notificationItem}
       onPress={() => handleNotificationPress(item)}
       onLongPress={() => handleDeleteNotification(item.id)}
-      activeOpacity={0.7}>
-      <View style={styles.notificationHeader}>
-        <Text style={styles.notificationTitle}>{item.title}</Text>
-        <View style={styles.pnTypeBadge}>
-          <Text style={styles.pnTypeText}>PN{item.pn_type}</Text>
+      activeOpacity={0.9}>
+      <LinearGradient
+        colors={getNotificationColor(item.pn_type)}
+        style={styles.notificationGradient}>
+        <View style={styles.notificationContent}>
+          <View style={styles.notificationHeader}>
+            <View style={styles.iconContainer}>
+              <Text style={styles.notificationIcon}>
+                {getNotificationIcon(item.pn_type)}
+              </Text>
+            </View>
+            <View style={styles.headerTextContainer}>
+              <Text style={styles.notificationTitle} numberOfLines={1}>
+                {item.title || 'Notification'}
+              </Text>
+              <Text style={styles.notificationTime}>
+                {formatDate(item.timestamp)}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => handleDeleteNotification(item.id)}
+              style={styles.deleteButton}>
+              <Text style={styles.deleteIcon}>🗑️</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.notificationBody} numberOfLines={2}>
+            {item.body || 'No content'}
+          </Text>
+
+          {renderMedia(item)}
+
+          <View style={styles.notificationFooter}>
+            <View style={styles.pnTypeBadge}>
+              <Text style={styles.pnTypeText}>
+                {item.pn_type === '1'
+                  ? 'Text'
+                  : item.pn_type === '2'
+                  ? 'Photo'
+                  : item.pn_type === '3'
+                  ? 'Video'
+                  : 'Type ' + item.pn_type}
+              </Text>
+            </View>
+            {item.notification_id && (
+              <Text style={styles.notificationId}>
+                ID: {item.notification_id}
+              </Text>
+            )}
+          </View>
         </View>
-      </View>
-      <Text style={styles.notificationBody} numberOfLines={2}>
-        {item.body}
-      </Text>
-      <View style={styles.notificationFooter}>
-        <Text style={styles.notificationTime}>
-          {formatDate(item.timestamp)}
-        </Text>
-      </View>
+      </LinearGradient>
     </TouchableOpacity>
   );
 
   const EmptyComponent = () => (
     <View style={styles.emptyContainer}>
+      <Text style={styles.emptyIcon}>📭</Text>
       <Text style={styles.emptyText}>No notifications yet</Text>
       <Text style={styles.emptySubtext}>
-        Push notifications will appear here
+        Your notification history will appear here
       </Text>
     </View>
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>History</Text>
-        {notifications.length > 0 && (
-          <TouchableOpacity onPress={handleClearAll} style={styles.clearButton}>
-            <Text style={styles.clearButtonText}>Clear All</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
+      <View style={styles.container}>
+        <LinearGradient
+          colors={Colors.gradients.primary}
+          style={styles.headerGradient}>
+          <View style={styles.header}>
+            <View>
+              <Text style={styles.title}>Notification History</Text>
+              <Text style={styles.subtitle}>
+                {notifications.length} notification
+                {notifications.length !== 1 ? 's' : ''}
+              </Text>
+            </View>
+            {notifications.length > 0 && (
+              <TouchableOpacity
+                onPress={handleClearAll}
+                style={styles.clearButton}>
+                <LinearGradient
+                  colors={Colors.gradients.red}
+                  style={styles.clearButtonGradient}>
+                  <Text style={styles.clearButtonText}>Clear All</Text>
+                </LinearGradient>
+              </TouchableOpacity>
+            )}
+          </View>
+        </LinearGradient>
 
-      <FlashList
-        data={notifications}
-        renderItem={renderNotificationItem}
-        estimatedItemSize={120}
-        keyExtractor={item => item.id}
-        ListEmptyComponent={EmptyComponent}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        contentContainerStyle={styles.listContent}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-      />
-    </View>
+        <FlashList
+          data={notifications}
+          renderItem={renderNotificationItem}
+          estimatedItemSize={150}
+          keyExtractor={item => item.id}
+          ListEmptyComponent={EmptyComponent}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={Colors.primaryLight}
+            />
+          }
+          contentContainerStyle={styles.listContent}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: Colors.background,
+  },
+  headerGradient: {
+    paddingTop: 20,
+    paddingBottom: 20,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
-    paddingBottom: 10,
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#141e30',
+    color: Colors.text.white,
+    marginBottom: 5,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: Colors.text.white,
+    opacity: Colors.opacity.light,
   },
   clearButton: {
-    padding: 8,
+    marginLeft: 10,
+  },
+  clearButtonGradient: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
   },
   clearButtonText: {
-    color: '#ff4444',
-    fontWeight: '600',
+    color: Colors.text.white,
+    fontWeight: 'bold',
+    fontSize: 14,
   },
   listContent: {
-    paddingHorizontal: 20,
+    padding: 20,
   },
-  notificationItem: {
-    backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
+  notificationGradient: {
+    borderRadius: 15,
+    elevation: 3,
+    shadowColor: Colors.shadow,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: Colors.opacity.dark,
     shadowRadius: 3.84,
-    elevation: 5,
+  },
+  notificationContent: {
+    backgroundColor: Colors.cardBackgroundTransparent,
+    margin: 2,
+    borderRadius: 13,
+    padding: 16,
   },
   notificationHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 12,
   },
-  notificationTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
+  iconContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: `rgba(255,255,255,${Colors.opacity.overlay})`,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  notificationIcon: {
+    fontSize: 28,
+  },
+  headerTextContainer: {
     flex: 1,
   },
-  pnTypeBadge: {
-    backgroundColor: '#141e30',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginLeft: 8,
+  notificationTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.text.primary,
+    marginBottom: 2,
   },
-  pnTypeText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: '600',
+  notificationTime: {
+    fontSize: 13,
+    color: Colors.text.tertiary,
+  },
+  deleteButton: {
+    padding: 8,
+  },
+  deleteIcon: {
+    fontSize: 20,
   },
   notificationBody: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 8,
+    fontSize: 15,
+    color: Colors.text.secondary,
+    lineHeight: 22,
+    marginBottom: 12,
+  },
+  notificationImage: {
+    width: '100%',
+    height: 180,
+    borderRadius: 10,
+    marginBottom: 12,
+  },
+  videoContainer: {
+    width: '100%',
+    height: 180,
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 12,
+    position: 'relative',
+  },
+  notificationVideo: {
+    flex: 1,
+  },
+  videoOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: `rgba(0,0,0,${Colors.opacity.overlay})`,
+  },
+  videoPlayIcon: {
+    fontSize: 40,
   },
   notificationFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  notificationTime: {
+  pnTypeBadge: {
+    backgroundColor: `rgba(0,0,0,${Colors.opacity.dark})`,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  pnTypeText: {
     fontSize: 12,
-    color: '#999',
+    fontWeight: '600',
+    color: Colors.text.primary,
   },
   notificationId: {
-    fontSize: 12,
-    color: '#999',
+    fontSize: 11,
+    color: Colors.text.quaternary,
   },
   separator: {
-    height: 10,
+    height: 12,
   },
   emptyContainer: {
     flex: 1,
@@ -248,15 +459,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 100,
   },
+  emptyIcon: {
+    fontSize: 60,
+    marginBottom: 20,
+  },
   emptyText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#666',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.text.primary,
     marginBottom: 8,
   },
   emptySubtext: {
-    fontSize: 14,
-    color: '#999',
+    fontSize: 16,
+    color: Colors.text.tertiary,
+    textAlign: 'center',
   },
 });
 

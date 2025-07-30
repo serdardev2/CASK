@@ -3,6 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Screen2 from '../screens/HomeStack/Screen2';
 import Screen3 from '../screens/HomeStack/Screen3';
 import Screen1 from '../screens/HomeStack/Screen1';
+import TextModeScreen from '../screens/HomeStack/TextModeScreen';
+import {Colors} from '../constants/colors';
 
 const Stack = createStackNavigator();
 
@@ -11,9 +13,9 @@ const Tab1StackNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#141e30',
+          backgroundColor: Colors.header.background,
         },
-        headerTintColor: '#fff',
+        headerTintColor: Colors.header.tint,
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -22,6 +24,11 @@ const Tab1StackNavigator = () => {
         name="Screen1"
         component={Screen1}
         options={{title: 'Home'}}
+      />
+      <Stack.Screen
+        name="TextMode"
+        component={TextModeScreen}
+        options={{title: 'Text Mode'}}
       />
       <Stack.Screen
         name="Screen2"

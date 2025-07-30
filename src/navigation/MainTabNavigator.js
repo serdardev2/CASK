@@ -6,6 +6,7 @@ import Tab3Screen from '../screens/Tab3/Tab3Screen';
 import HomeIcon from '../components/icons/HomeIcon';
 import NotificationIcon from '../components/icons/NotificationIcon';
 import HistoryIcon from '../components/icons/HistoryIcon';
+import {Colors} from '../constants/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,12 +14,12 @@ const MainTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#141e30',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: Colors.tabBar.activeTint,
+        tabBarInactiveTintColor: Colors.tabBar.inactiveTint,
         tabBarStyle: {
-          backgroundColor: '#ffffff',
+          backgroundColor: Colors.tabBar.background,
           borderTopWidth: 1,
-          borderTopColor: '#e0e0e0',
+          borderTopColor: Colors.tabBar.borderTop,
         },
       }}>
       <Tab.Screen
@@ -31,14 +32,14 @@ const MainTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Tab2"
+        name="Push Notification"
         component={Tab2Screen}
         options={{
           tabBarLabel: 'Push Notification',
           headerStyle: {
-            backgroundColor: '#141e30',
+            backgroundColor: Colors.header.background,
           },
-          headerTintColor: '#fff',
+          headerTintColor: Colors.header.tint,
           headerTitleStyle: {
             fontWeight: 'bold',
           },
@@ -48,14 +49,14 @@ const MainTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Tab3"
+        name="History"
         component={Tab3Screen}
         options={{
           tabBarLabel: 'History',
           headerStyle: {
-            backgroundColor: '#141e30',
+            backgroundColor: Colors.header.background,
           },
-          headerTintColor: '#fff',
+          headerTintColor: Colors.header.tint,
           headerTitleStyle: {
             fontWeight: 'bold',
           },

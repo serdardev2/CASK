@@ -39,7 +39,7 @@ export default class App extends React.Component {
 
       switch (pnType) {
         case '1':
-          navigateToTab1Screen('Screen1', {notificationData});
+          navigateToTab1Screen('TextMode', {notificationData});
           break;
         case '2':
           navigateToTab1Screen('Screen2', {notificationData});
