@@ -17,6 +17,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {navigateToHomeStackScreen} from '../../services/NavigationService';
 import WebView from 'react-native-webview';
 import {Colors} from '../../constants/colors';
+import Toast from 'react-native-toast-message';
 
 const {width} = Dimensions.get('window');
 
@@ -53,6 +54,13 @@ const NotificationHistoryScreen = () => {
           onPress: async () => {
             await NotificationStorage.deleteNotification(notificationId);
             loadNotifications();
+            Toast.show({
+              type: 'alert',
+              text1: 'Notification Deleted',
+              text2: 'The notification has been removed from history',
+              position: 'top',
+              visibilityTime: 2000,
+            });
           },
         },
       ],
@@ -95,6 +103,13 @@ const NotificationHistoryScreen = () => {
           onPress: async () => {
             await NotificationStorage.clearHistory();
             loadNotifications();
+            Toast.show({
+              type: 'alert',
+              text1: 'All Notifications Cleared',
+              text2: 'Your notification history has been cleared',
+              position: 'top',
+              visibilityTime: 2000,
+            });
           },
         },
       ],

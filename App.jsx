@@ -16,6 +16,8 @@ import {
   navigateToHomeStackScreen,
 } from './src/services/NavigationService';
 import {NotificationStorage} from './src/services/NotificationStorage';
+import Toast from 'react-native-toast-message';
+import {toastConfig} from './src/config/toastConfig';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -93,6 +95,7 @@ export default class App extends React.Component {
         <NavigationContainer ref={navigationRef}>
           <MainTabNavigator />
         </NavigationContainer>
+        <Toast config={toastConfig} />
       </SafeAreaProvider>
     );
   }

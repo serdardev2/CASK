@@ -69,4 +69,11 @@ export const Colors = {
     background: '#141e30',
     tint: '#fff',
   },
+
+  toast: {
+    success: '#4CAF50',
+    alert: '#F44336',
+    error: '#FF5252',
+    info: '#2196F3',
+  },
 };

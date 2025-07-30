@@ -18,6 +18,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import {getFcmToken, getCurrentFcmToken} from '../../notificationServices';
 import {Colors} from '../../constants/colors';
 import Config from 'react-native-config';
+import Toast from 'react-native-toast-message';
 
 const PushNotificationScreen = ({route}) => {
   const [fcmToken, setFcmToken] = useState('');
@@ -103,22 +104,31 @@ const PushNotificationScreen = ({route}) => {
       } catch (jsonError) {}
 
       if (response.ok) {
+        Toast.show({
+          type: 'success',
+          text1: 'Success! 🎉',
+          text2: `Notification scheduled with ${delay} second delay`,
+          position: 'top',
+          visibilityTime: 3000,
+        });
         setDelay('');
       } else {
-        Alert.alert(
-          'Error',
-          `Failed to schedule notification: ${
-            responseData?.message || 'Unknown error'
-          }`,
-          [{text: 'OK'}],
-        );
+        Toast.show({
+          type: 'error',
+          text1: 'Failed to schedule notification',
+          text2: responseData?.message,
+          position: 'top',
+          visibilityTime: 3000,
+        });
       }
     } catch (error) {
-      Alert.alert(
-        'Network Error',
-        'Failed to connect to the server. Please check your internet connection.',
-        [{text: 'OK'}],
-      );
+      Toast.show({
+        type: 'error',
+        text1: 'Network Error',
+        text2: 'Failed to connect to the server',
+        position: 'top',
+        visibilityTime: 3000,
+      });
     } finally {
       setLoading(false);
     }
