@@ -103,11 +103,6 @@ const PushNotificationScreen = ({route}) => {
       } catch (jsonError) {}
 
       if (response.ok) {
-        Alert.alert(
-          'Success! 🎉',
-          `Notification scheduled with ${delay} second delay`,
-          [{text: 'OK'}],
-        );
         setDelay('');
       } else {
         Alert.alert(
