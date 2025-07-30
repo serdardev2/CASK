@@ -75,24 +75,7 @@ const TextModeScreen = ({navigation, route}) => {
                       <Text style={styles.typeBadgeText}>Text Mode</Text>
                     </View>
                   </View>
-                  {notificationData.notification_id && (
-                    <View style={styles.metaContainer}>
-                      <Text style={styles.metaLabel}>ID:</Text>
-                      <Text style={styles.metaValue}>
-                        {notificationData.notification_id}
-                      </Text>
-                    </View>
-                  )}
                 </View>
-
-                {notificationData.fullData && (
-                  <View style={styles.debugContainer}>
-                    <Text style={styles.debugTitle}>Debug Info</Text>
-                    <Text style={styles.debugText}>
-                      {JSON.stringify(notificationData.fullData.data, null, 2)}
-                    </Text>
-                  </View>
-                )}
               </View>
             </LinearGradient>
           ) : (
@@ -115,28 +98,6 @@ const TextModeScreen = ({navigation, route}) => {
               </TouchableOpacity>
             </View>
           )}
-
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoTitle}>About Text Mode</Text>
-            <Text style={styles.infoText}>
-              Text mode notifications contain only textual content without any media attachments. 
-              They are perfect for simple alerts, messages, and updates that don't require visual elements.
-            </Text>
-            <View style={styles.featureList}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Lightweight and fast</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Title and body content</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Perfect for alerts</Text>
-              </View>
-            </View>
-          </View>
         </View>
       </ScrollView>
     </>

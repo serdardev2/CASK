@@ -228,11 +228,6 @@ const NotificationHistoryScreen = () => {
                   : 'Type ' + item.pn_type}
               </Text>
             </View>
-            {item.notification_id && (
-              <Text style={styles.notificationId}>
-                ID: {item.notification_id}
-              </Text>
-            )}
           </View>
         </View>
       </LinearGradient>
