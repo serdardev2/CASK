@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CASKRNChallengeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CASKRNChallengeTests.m */; };
+		05A8F2FC9F0121EC6D7896E3 /* libPods-CASKRNChallenge-base-CASKRNChallengeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE3B5218A67619F34ABD412 /* libPods-CASKRNChallenge-base-CASKRNChallengeTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -15,8 +16,7 @@
 		2E656E2A2BB812130090D765 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E656E292BB812130090D765 /* GoogleService-Info.plist */; };
 		2E656E2D2BB885CF0090D765 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2E656E2C2BB885CF0090D765 /* InfoPlist.xcstrings */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		C0A7A9DA204A0E5841E040FD /* Pods_CASKRNChallenge_base_CASKRNChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F33ED3BA2BBD8713A90086D /* Pods_CASKRNChallenge_base_CASKRNChallengeTests.framework */; };
-		EF78A22CA2755521431E742C /* Pods_CASKRNChallenge_base_CASKRNChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE81CA77FB3E874164347DD3 /* Pods_CASKRNChallenge_base_CASKRNChallenge.framework */; };
+		E7955A0F3260925A283C47A3 /* libPods-CASKRNChallenge-base-CASKRNChallenge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A7B7273F4E14B63E3A167C /* libPods-CASKRNChallenge-base-CASKRNChallenge.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +33,6 @@
 		00E356EE1AD99517003FC87E /* CASKRNChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CASKRNChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CASKRNChallengeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CASKRNChallengeTests.m; sourceTree = "<group>"; };
-		0F33ED3BA2BBD8713A90086D /* Pods_CASKRNChallenge_base_CASKRNChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CASKRNChallenge_base_CASKRNChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* CASKRNChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CASKRNChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CASKRNChallenge/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = CASKRNChallenge/AppDelegate.mm; sourceTree = "<group>"; };
@@ -45,10 +44,11 @@
 		2E656E292BB812130090D765 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2E656E2B2BB885220090D765 /* CASKRNChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CASKRNChallenge.entitlements; path = CASKRNChallenge/CASKRNChallenge.entitlements; sourceTree = "<group>"; };
 		2E656E2C2BB885CF0090D765 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; name = InfoPlist.xcstrings; path = CASKRNChallenge/InfoPlist.xcstrings; sourceTree = "<group>"; };
+		42A7B7273F4E14B63E3A167C /* libPods-CASKRNChallenge-base-CASKRNChallenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CASKRNChallenge-base-CASKRNChallenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A8039110D5418E7DAB0265F /* Pods-CASKRNChallenge-base-CASKRNChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CASKRNChallenge-base-CASKRNChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-CASKRNChallenge-base-CASKRNChallengeTests/Pods-CASKRNChallenge-base-CASKRNChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6C2F9BB4A9114DC29E6684F5 /* Pods-CASKRNChallenge-base-CASKRNChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CASKRNChallenge-base-CASKRNChallenge.release.xcconfig"; path = "Target Support Files/Pods-CASKRNChallenge-base-CASKRNChallenge/Pods-CASKRNChallenge-base-CASKRNChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CASKRNChallenge/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BE81CA77FB3E874164347DD3 /* Pods_CASKRNChallenge_base_CASKRNChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CASKRNChallenge_base_CASKRNChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAE3B5218A67619F34ABD412 /* libPods-CASKRNChallenge-base-CASKRNChallengeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CASKRNChallenge-base-CASKRNChallengeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C787D1401844F652973A9C0F /* Pods-CASKRNChallenge-base-CASKRNChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CASKRNChallenge-base-CASKRNChallenge.debug.xcconfig"; path = "Target Support Files/Pods-CASKRNChallenge-base-CASKRNChallenge/Pods-CASKRNChallenge-base-CASKRNChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0A7A9DA204A0E5841E040FD /* Pods_CASKRNChallenge_base_CASKRNChallengeTests.framework in Frameworks */,
+				05A8F2FC9F0121EC6D7896E3 /* libPods-CASKRNChallenge-base-CASKRNChallengeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF78A22CA2755521431E742C /* Pods_CASKRNChallenge_base_CASKRNChallenge.framework in Frameworks */,
+				E7955A0F3260925A283C47A3 /* libPods-CASKRNChallenge-base-CASKRNChallenge.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,8 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				BE81CA77FB3E874164347DD3 /* Pods_CASKRNChallenge_base_CASKRNChallenge.framework */,
-				0F33ED3BA2BBD8713A90086D /* Pods_CASKRNChallenge_base_CASKRNChallengeTests.framework */,
+				42A7B7273F4E14B63E3A167C /* libPods-CASKRNChallenge-base-CASKRNChallenge.a */,
+				BAE3B5218A67619F34ABD412 /* libPods-CASKRNChallenge-base-CASKRNChallengeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -615,7 +615,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -698,7 +701,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
